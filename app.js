@@ -1,47 +1,56 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
+const { promisify } = require("util");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const db = [
-  {
-    name: "Tom Jerry",
-    phone: "123-123-1234",
-    email: "Tom@gmail.com",
-    id: "1"
-  }
-];
+const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
-//! Must need middleware
+//! Middleware
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //! API
-app.get("/api/reservation", (req, res) => {
-  console.log("hit get api", req.data);
+app.get("/api/reservations", async (req, res) => {
+  // Get reservations from DB
+  const db = await readFile(path.join(__dirname, "database/db.json"), "utf-8");
+  console.log("this is db: ", db);
+
+  const savedReservations = JSON.parse(db);
+
+  console.log("Saved db: ", savedReservations);
+
   res.status(200).json({
     status: "succes",
     message: "The data from get api",
-    data: db
+    result: savedReservations.length,
+    data: savedReservations
   });
 });
-app.post("/api/reservation", (req, res) => {
+
+app.post("/api/reservations", async (req, res) => {
   console.log("hit post api", req.body);
+
+  const db = await readFile(path.join(__dirname, "database/db.json"), "utf-8");
+
+  console.log(db);
+  let parsedDB = JSON.parse(db);
+
+  parsedDB.push(req.body);
+
+  let stringifiedDB = JSON.stringify(parsedDB);
+
+  await writeFile(path.join(__dirname, "database/db.json"), stringifiedDB);
+
   res.status(200).json({
     status: "success",
-    message: "The data from post api",
-    data: db
-  });
-});
-app.get("/api/tables", (req, res) => {
-  console.log("hit get tables api", req.body);
-  res.status(200).json({
-    status: "success",
-    message: "The data from get tables api",
-    data: db
+    message: "Successfully added your reservation!",
+    data: req.body
   });
 });
 
@@ -53,7 +62,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/tables", (req, res) => {
-  res.sendFile(path.join(`${__dirname}/public`, "home.html"), err => {
+  res.sendFile(path.join(`${__dirname}/public`, "tables.html"), err => {
     if (err) console.log(err);
   });
 });
@@ -68,5 +77,3 @@ app.get("/reserve", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Listening from ${PORT}....`);
 });
-
-// DB

@@ -1,0 +1,9 @@
+.btnReservation {
+  background-color: orangered !important;
+}
+body {
+  padding: 10px;
+}
+li > * {
+  padding: 10px;
+}
