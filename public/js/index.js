@@ -7,13 +7,15 @@ $("document").ready(async () => {
       dataType: "json"
     });
 
-    const tablesArr = res.data;
+    const { maxReservations, reservDB, waitDB } = res.data;
 
-    for (let i = 0; i < tablesArr.length; i++) {
-      const { name, phone, email, id } = tablesArr[i];
+    console.log(maxReservations, reservDB, waitDB);
 
-      let html = `<li id="table"><span id="num">${i +
-        1}</span><span id="id">${id}</span></span><span id="name">${name}</span</li>`;
+    for (let i = 0; i < reservDB.length; i++) {
+      const { name, phone, email, id } = reservDB[i];
+
+      let html = `<li id="table"><p><span id="num">${i +
+        1}</span><span id="id">${id}</span></span><span id="name">${name}</span></p><p><span>${email}</span><span>${phone}</span></p></li>`;
 
       $("#tables").append(html);
     }
