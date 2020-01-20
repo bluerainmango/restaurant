@@ -1,4 +1,4 @@
-$("document").ready(async () => {
+$(document).ready(async () => {
   // If you are on table page
   if ($("#tables").length > 0) {
     const res = await $.ajax({
@@ -11,13 +11,18 @@ $("document").ready(async () => {
 
     console.log(maxReservations, reservDB, waitDB);
 
-    for (let i = 0; i < reservDB.length; i++) {
-      const { name, phone, email, id } = reservDB[i];
+    renderList(reservDB, "#tables");
+    renderList(waitDB, "#wait");
 
-      let html = `<li id="table"><p><span id="num">${i +
-        1}</span><span id="id">${id}</span></span><span id="name">${name}</span></p><p><span>${email}</span><span>${phone}</span></p></li>`;
+    function renderList(db, target) {
+      for (let i = 0; i < db.length; i++) {
+        const { name, phone, email, id } = db[i];
 
-      $("#tables").append(html);
+        let html = `<li class="table"><p><span class="num">${i +
+          1}</span></span><span class="name">${name}</span><span class="id">[ ID: ${id} ]</span></p><p><span class="email">${email}</span><span class="phone">${phone}</span></p></li>`;
+
+        $(target).append(html);
+      }
     }
   }
 

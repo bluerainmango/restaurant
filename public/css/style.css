@@ -1,9 +1,65 @@
+.jumbotron {
+  width: 1000px;
+  background-color: rgb(191, 225, 255);
+}
+.jumbotron a {
+  margin: 5px 0;
+  width: 300px;
+}
+.display-4 {
+  color: rgb(0, 115, 255);
+}
+.lead {
+  text-align: center;
+}
+h3 {
+  color: #fff;
+  font-weight: 200;
+}
+form {
+  margin-top: 20px;
+  width: 300px;
+}
+hr {
+  width: 100%;
+}
+.newResTitle {
+  color: #fff;
+  font-weight: lighter;
+}
+form input {
+  margin-bottom: 10px;
+  text-align: center;
+  border: 0;
+  width: 100%;
+}
+form button {
+  width: 100%;
+}
 .btnReservation {
   background-color: orangered !important;
 }
 body {
   padding: 10px;
 }
-li > * {
-  padding: 10px;
+ul {
+  list-style: none;
+  padding-left: 0;
+  width: 300px;
+  color: rgb(79, 79, 79);
+}
+li p {
+  margin: 5px 0;
+}
+li p span {
+  margin-right: 10px;
+}
+.num {
+  background-color: #fff;
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+}
+.email {
+  padding-left: 30px;
 }

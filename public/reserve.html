@@ -4,33 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Bootstrap CSS -->
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-  />
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <link rel="stylesheet" href="./css/style.css" />
-    <title>Document</title>
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>New Reservation</title>
   </head>
   <body>
-    <main>
-      <a href="/tables" class="waves-effect waves-light btn">View Tables</a>
-      <a href="/" class="waves-effect waves-light btn">Homes</a>
+    <main class="d-flex justify-content-center">
+      <div class="jumbotron d-flex flex-column align-items-center">
+        <h1 class="display-4">New Reservation</h1>
+        <p class="lead">
+          Add the new customer to the reservations or waiting list. If all the tables are currently
+          reserved, the customer will be automatically added to the waiting list.
+        </p>
+        <a href="/tables" class="btn btn-info">View Tables</a>
+        <a href="/" class="btn btn-success">Home</a>
+        <hr class="my-4" />
+        <h2 class="newResTitle">Enter New Reservation</h2>
+        <form id="form" class="d-flex flex-column align-items-center">
+          <input type="text" name="name" id="name" placeholder="Name" />
 
-      <form id="form">
-        <label for="name">name</label>
-        <input type="text" name="name" id="name" value="emily" />
-        <label for="phone">Phone Number</label>
-        <input type="text" name="phone" id="phone" value="123-123-4444" />
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="emily@gmail.com" />
-        <label for="id">Unique ID</label>
-        <input type="text" name="id" id="id" value="abc" />
-        <button type="submit">Submit</button>
-      </form>
+          <input type="text" name="phone" id="phone" placeholder="Phone Number" />
+
+          <input type="text" name="email" id="email" placeholder="Email" />
+
+          <input type="text" name="id" id="id" placeholder="Unique ID" />
+          <button type="submit" class="btn btn-danger">Submit</button>
+        </form>
+      </div>
     </main>
+
+    <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src=./js/index.js></script>
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Custom JS -->
+    <script src="./js/index.js"></script>
   </body>
 </html>
