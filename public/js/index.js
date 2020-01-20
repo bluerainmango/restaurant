@@ -3,7 +3,7 @@ $(document).ready(async () => {
   if ($("#tables").length > 0) {
     const res = await $.ajax({
       method: "GET",
-      url: "http://localhost:3000/api/reservations",
+      url: "/api/reservations",
       dataType: "json"
     });
 
@@ -38,7 +38,7 @@ $(document).ready(async () => {
 
       $.ajax({
         method: "POST",
-        url: "http://localhost:3000/api/reservations",
+        url: "/api/reservations",
         data: {
           name,
           email,
@@ -47,6 +47,8 @@ $(document).ready(async () => {
         },
         dataType: "json"
       });
+
+      location.assign("/tables");
     });
   }
 });
