@@ -19,11 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/api/reservations", async (req, res) => {
   // Get reservations from DB
   const db = await readFile(path.join(__dirname, "database/db.json"), "utf-8");
-  console.log("this is db: ", db);
 
   const savedReservations = JSON.parse(db);
-
-  console.log("Saved db: ", savedReservations);
 
   res.status(200).json({
     status: "succes",
@@ -34,11 +31,8 @@ app.get("/api/reservations", async (req, res) => {
 });
 
 app.post("/api/reservations", async (req, res) => {
-  console.log("hit post api", req.body);
-
   const db = await readFile(path.join(__dirname, "database/db.json"), "utf-8");
 
-  console.log(db);
   let parsedDB = JSON.parse(db);
 
   parsedDB.push(req.body);
