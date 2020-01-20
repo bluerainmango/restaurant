@@ -6,8 +6,8 @@ const { promisify } = require("util");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const readFile = promisify(fs.readFile);
-const writeFile = promisify(fs.writeFile);
+// const readFile = promisify(fs.readFile);
+// const writeFile = promisify(fs.writeFile);
 
 //! Middleware
 app.use(express.static(path.join(__dirname, "public")));
@@ -15,36 +15,47 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//! Initial DB
+let data = {
+  maxReservations: 5,
+  reservDB: [{ name: "Emily Yu", email: "emily@gmail.com", phone: "123-456-7899", id: "1" }],
+  waitDB: [{ name: "Andy Cho", email: "andy@gmail.com", phone: "424-326-1222", id: "2" }]
+};
+
 //! API
 app.get("/api/reservations", async (req, res) => {
-  // Get reservations from DB
-  const db = await readFile(path.join(__dirname, "database/db.json"), "utf-8");
-
-  const savedReservations = JSON.parse(db);
+  // const db = await readFile(path.join(__dirname, "database/db.json"), "utf-8");
 
   res.status(200).json({
-    status: "succes",
-    message: "The data from get api",
-    result: savedReservations.length,
-    data: savedReservations
+    status: "success",
+    reservedSeats: data.reservDB.length,
+    waitings: data.waitDB.length,
+    data
   });
 });
 
 app.post("/api/reservations", async (req, res) => {
-  const db = await readFile(path.join(__dirname, "database/db.json"), "utf-8");
+  // const db = await readFile(path.join(__dirname, "database/db.json"), "utf-8");
+  // let parsedDB = JSON.parse(db);
+  // parsedDB.push(req.body);
+  // let stringifiedDB = JSON.stringify(parsedDB);
+  // await writeFile(path.join(__dirname, "database/db.json"), stringifiedDB);
 
-  let parsedDB = JSON.parse(db);
+  // To retreive only designated inputs
+  console.log(req.body);
+  const { name, email, phone, id } = req.body;
 
-  parsedDB.push(req.body);
-
-  let stringifiedDB = JSON.stringify(parsedDB);
-
-  await writeFile(path.join(__dirname, "database/db.json"), stringifiedDB);
-
+  if (data.reservDB.length < data.maxReservations) {
+    // push db
+    data.reservDB.push({ name, email, phone, id });
+  } else {
+    // push wait
+    data.waitDB.push({ name, email, phone, id });
+  }
   res.status(200).json({
     status: "success",
     message: "Successfully added your reservation!",
-    data: req.body
+    data
   });
 });
 
